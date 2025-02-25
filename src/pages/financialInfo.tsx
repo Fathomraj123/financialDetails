@@ -19,13 +19,13 @@ const financialInfo = () => {
     return (
       item.accountName.toLowerCase().includes(submittedSearch.toLowerCase()) ||
       item.accountNumber.toString().includes(submittedSearch) ||
-      (item.companyName && item.companyName.toLowerCase().includes(submittedSearch.toLowerCase()))
+      (item.companyName.toLowerCase().includes(submittedSearch.toLowerCase()))
     );
   });
 
 
 
-  const sortedData = filteredData.slice().sort((a, b) => {
+  const sortedData = filteredData.sort((a, b) => {
 
     if (sort === "A-Z") {
       return a.companyName.localeCompare(b.companyName);
