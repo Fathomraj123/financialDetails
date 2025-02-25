@@ -58,7 +58,7 @@ const PeoplePage = () => {
   
           <Button colorScheme="purple" onClick={handleSubmit}>Submit</Button>
         </Box>
-        {loading && <Spinner color="blue" />}
+        {loading && <Spinner color="white" />}
       {error && <Text color="red">Error: {error}</Text>}
 
       {!loading && !error && (

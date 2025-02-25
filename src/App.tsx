@@ -10,6 +10,7 @@ function App() {
       <Layout>
 
       <Routes>
+        <Route path="/" element={<PeoplePage />} />
         <Route path="/personalCard" element={<PeoplePage />} />
         <Route path="/financialInfo" element={<FinancialInfo />} />
       </Routes>
