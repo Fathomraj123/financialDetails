@@ -1,21 +1,21 @@
-import { Routes, Route, Link } from "react-router-dom";
+
+import { Routes, Route } from "react-router-dom";
 import PeoplePage from "./pages/personalCard";
-import { Container, Flex, Button } from "@chakra-ui/react";
+import Layout from "./components/layout";
+import FinancialInfo from "./pages/financialInfo";
 
 function App() {
   return (
-    <Container maxW="container.xl" py={6}>
-      {/* Navigation Bar */}
-      <Flex justify="center" mb={4} gap={4}>
-        <Button as={Link} to="/" colorScheme="blue">People Page</Button>
-        <Button as={Link} to="/finance" colorScheme="green">Finance Page</Button>
-      </Flex>
+ 
+      <Layout>
 
-      {/* Routes */}
       <Routes>
-        <Route path="/" element={<PeoplePage />} />
+        <Route path="/personalCard" element={<PeoplePage />} />
+        <Route path="/financialInfo" element={<FinancialInfo />} />
       </Routes>
-    </Container>
+      </Layout>
+
+  
   );
 }
 
