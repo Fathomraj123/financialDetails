@@ -12,7 +12,7 @@ const PersonalCard = () => {
   const [submitSearch, setSubmitSeaarch] = useState("");
 
 
-  const handleSubmit = () => setSubmitSeaarch(search);
+  const handleSubmit = () => setSubmitSeaarch(search.trim());
 
   const filteredData = people.filter((item) => {
 

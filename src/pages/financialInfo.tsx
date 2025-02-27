@@ -14,7 +14,7 @@ const FinancialInfo = () => {
   const [sort, setSort] = useState("");
 
   const handleSubmit = () => {
-    setSubmittedSearch(search); 
+    setSubmittedSearch(search.trim()); 
   };
 
   const filteredData = data.filter((item) => {
