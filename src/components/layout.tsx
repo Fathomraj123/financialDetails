@@ -1,12 +1,12 @@
 import { Box } from "@chakra-ui/react";
 // import { Link } from "react-router-dom";
 
-import Header from "./design/header";
-import Footer from "./design/footer";
+import Header from "../Layout/Header";
+import Footer from "../Layout/Footer";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Box minH="100vh" bgGradient="linear(to-b, purple.800, black)" color="white">
+    <Box minH="100vh" bg="grey.100" color="white">
       <Header />
         <Box as="main" p={6}>
           {children}

@@ -9,7 +9,7 @@ interface Person {
   city: string;
 }
 
-const usePeopleData = (count: number) => {
+const usePeopleData = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -31,7 +31,7 @@ const usePeopleData = (count: number) => {
     } finally {
       setLoading(false); 
     }
-  }, [count]);
+  }, []);
 
   return { people, loading, error };
 };

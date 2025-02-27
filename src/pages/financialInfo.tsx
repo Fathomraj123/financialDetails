@@ -1,8 +1,11 @@
 import { useState } from "react";
 import usefetchRecord from "../hooks/useFetchRecord";
-import { Box, Table, Thead, Tbody, Tr, Th, Td, Text, Spinner, Select, Input, Button } from "@chakra-ui/react";
+import { Box, Table, Thead, Tbody, Tr, Th, Td, Text, Spinner} from "@chakra-ui/react";
+import {Searching, Sorting} from "../components/SearctAndSort";
 
-const financialInfo = () => {
+
+
+const FinancialInfo = () => {
 
   const { data, error, loading } = usefetchRecord();
   const [search, setSearch] = useState("");
@@ -27,7 +30,7 @@ const financialInfo = () => {
 
   const sortedData = filteredData.sort((a, b) => {
 
-    if (sort === "A-Z") {
+    if (sort === "A-Z ") {
       return a.companyName.localeCompare(b.companyName);
     } else if (sort === "Z-A") {
       return b.companyName.localeCompare(a.companyName);
@@ -41,34 +44,15 @@ const financialInfo = () => {
 
 
   return (
-    <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" w="100%" p={4}>
+    <Box display="flex" color = "black" flexDirection="column" alignItems="center" justifyContent="center" w="100%" p={4}>
 
       <Text fontSize="3xl" fontWeight="bold" mb={4}>Finance Data</Text>
 
       <Box display="flex" gap={4} justifyContent="space-between" mb={4} w="90%" maxW="1200px">
-        <Box w="250px">
-          <Select value={sort} onChange={(e) => setSort(e.target.value)} bg="#202020" borderRadius="md" color="white">
-            <option value="" style={{ backgroundColor: "#202020" }}>Sort By</option>
-            <option value="A-Z" style={{ backgroundColor: "#202020" }}>A-Z</option>
-            <option value="Z-A" style={{ backgroundColor: "#202020" }}>Z-A</option>
-            <option value="Low to High" style={{ backgroundColor: "#202020" }}>Low to High</option>
-            <option value="High to Low" style={{ backgroundColor: "#202020" }}>High to Low</option>
-          </Select>
-        </Box>
-
-
-        <Input
-          type="text"
-          value={search}
-          placeholder="Search by account name, company name, or account balance"
-          onChange={(e) => setSearch(e.target.value)}
-          bg="gray.800"
-          color="white"
-          fontWeight="500"
-          borderRadius="md"
-        />
-
-        <Button colorScheme="purple" onClick={handleSubmit}>Submit</Button>
+        
+              <Sorting sort={sort} setSort={setSort} option= {["A-Z", "Z-A", "Low to High","High to Low"]} />
+               <Searching search = {search} setSearch = {setSearch} handleSubmit = {handleSubmit} placeholder={"Search by Comapany name, account number or acount name" } />
+        
       </Box>
 
       {loading && <Spinner color="blue" />}
@@ -106,4 +90,4 @@ const financialInfo = () => {
   );
 };
 
-export default financialInfo;
+export default FinancialInfo;
