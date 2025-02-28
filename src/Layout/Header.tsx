@@ -9,8 +9,10 @@ const Header = () => {
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure()
   const handleSignOut = () => {
+
     localStorage.removeItem("isAuthenticated"); //removing auth status
     navigate("/SignIn"); //redirect to signIn page
+    onClose();
     // window.location.href = "/SignIn";
      window.location.reload();
     
@@ -69,7 +71,7 @@ const Header = () => {
             </DrawerBody>
 
             <DrawerFooter bgColor="white">
-              <Button colorScheme='blue' variant='outline' mr={3} onClick = {handleSignOut}>
+              <Button colorScheme='blue' variant='outline'   mr={3} onClick = {handleSignOut}>
                 SignOut
               </Button>
 
