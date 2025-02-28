@@ -1,5 +1,5 @@
 import { Box, Text, Spinner} from "@chakra-ui/react";
-import PersonCard from "../components/Card";
+import PersonCard from "../components/card";
 import usePeopleData from "../hooks/usePeopleData";
 import {Searching, Sorting} from "../components/SearctAndSort";
 import { useState } from "react";

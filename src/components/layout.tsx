@@ -5,7 +5,7 @@ import Header from "../Layout/Header";
 import Footer from "../Layout/Footer";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  return (
+  return ( 
     <Box minH="100vh" bg="grey.100" color="white">
       <Header />
         <Box as="main"  minHeight="80vh" p={6}>

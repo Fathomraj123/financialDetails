@@ -1,12 +1,19 @@
 import { Box, Button, Flex, Image, Text, Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent } from "@chakra-ui/react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 import { useDisclosure } from '@chakra-ui/react'
+import { Navigate } from "react-router-dom";
 
 const Header = () => {
   const location = useLocation();
-
+  const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const handleSignOut = () => {
+    localStorage.removeItem("isAuthenticated"); //removing auth status
+    navigate("/SignIn"); //redirect to signIn page
+    // window.location.href = "/SignIn";
+  }
+  
 
   return (
     <Flex as="nav" p={4} justify="space-between" align="center" bg="purple.900" boxShadow="md">
@@ -60,7 +67,7 @@ const Header = () => {
             </DrawerBody>
 
             <DrawerFooter bgColor="white">
-              <Button colorScheme='blue' variant='outline' mr={3} onClick={onClose}>
+              <Button colorScheme='blue' variant='outline' mr={3} onClick = {handleSignOut}>
                 SignOut
               </Button>
 
@@ -79,8 +86,6 @@ const Header = () => {
           </Link>
         </Box>
       </Box>
-
-
     </Flex>
   );
 };
