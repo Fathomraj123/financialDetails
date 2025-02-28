@@ -1,5 +1,5 @@
 import { Box, Button, Input, Heading, Text, Link , VStack} from "@chakra-ui/react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import {useNavigate } from "react-router-dom";
 
 
@@ -8,6 +8,8 @@ const SignIn = () =>{
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+
+   
 
     const handleLogin = () => {
         const storedUser = JSON.parse(localStorage.getItem("user") || "null");
@@ -20,6 +22,7 @@ const SignIn = () =>{
         if ((storedUser.email === email || storedUser.username === username) && storedUser.password === password) {
             localStorage.setItem("isAuthenticated", "true"); 
             navigate("/personalCard");
+            window.location.reload();
         } else {
             alert("Invalid credentials");
         }

@@ -12,6 +12,8 @@ const Header = () => {
     localStorage.removeItem("isAuthenticated"); //removing auth status
     navigate("/SignIn"); //redirect to signIn page
     // window.location.href = "/SignIn";
+     window.location.reload();
+    
   }
   
 
