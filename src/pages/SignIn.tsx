@@ -21,7 +21,7 @@ const SignIn = () =>{
     
         if ((storedUser.email === email || storedUser.username === username) && storedUser.password === password) {
             localStorage.setItem("isAuthenticated", "true"); 
-            navigate("/personalCard");
+            navigate("/");
             window.location.reload();
         } else {
             alert("Invalid credentials");

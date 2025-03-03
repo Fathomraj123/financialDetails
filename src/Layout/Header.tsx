@@ -10,7 +10,7 @@ const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const handleSignOut = () => {
 
-    localStorage.removeItem("isAuthenticated"); //removing auth status
+    localStorage.setItem("isAuthenticated", "False") ; //removing auth status
     navigate("/SignIn"); //redirect to signIn page
     onClose();
     // window.location.href = "/SignIn";
