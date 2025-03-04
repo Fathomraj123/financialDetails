@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import PersonalCard from "../pages/personalCard"
-import Layout from "../components/layout";
-import FinancialInfo from "../pages/financialInfo";
+import PersonalCard from "../pages/PersonalCard"
+import Layout from "../components/Layout";
+import FinancialInfo from "../pages/FinancialInfo";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import PrivateRoute from "../components/PrivateRoute";
