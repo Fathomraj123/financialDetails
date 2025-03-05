@@ -1,7 +1,7 @@
 import { useState } from "react";
-import usefetchRecord from "../hooks/useFetchRecord";
+import usefetchRecord from "@/hooks/useFetchRecord";
 import { Box, Table, Thead, Tbody, Tr, Th, Td, Text, Spinner} from "@chakra-ui/react";
-import {Searching, Sorting} from "../components/SearctAndSort";
+import {Searching, Sorting} from "@/components/SearctAndSort";
 
 
 

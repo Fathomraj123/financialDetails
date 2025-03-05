@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
-import PersonalCard from "../pages/personalCard"
-import Layout from "../components/layout";
-import FinancialInfo from "../pages/financialInfo";
-import SignIn from "../pages/SignIn";
-import SignUp from "../pages/SignUp";
-import PrivateRoute from "../components/PrivateRoute";
-import PageNotFound from "../pages/PageNotFound";
-import Home from "../pages/Home";
+import PersonalCard from "@/pages/personalCard"
+import Layout from "@/components/layout";
+import FinancialInfo from "@/pages/financialInfo";
+import SignIn from "@/pages/SignIn";
+import SignUp from "@/pages/SignUp";
+import PrivateRoute from "@/routes/PrivateRoute";
+import PageNotFound from "@/pages/PageNotFound";
+import Home from "@/pages/Home";
 
 
 const AppRoute = () => {
