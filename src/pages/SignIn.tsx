@@ -20,17 +20,17 @@ const SignIn = () => {
   const navigate = useNavigate();
 
   const validation = yup.object().shape({
-    email: yup.string().email("invalid email").required("Email is required"),
-    password: yup.string().required("password is mandotry"),
+    emailOrUsername: yup.string().required("Email or Username is required"),
+    password: yup.string().required("Password is mandatory"),
   });
-  const defaultvalue = {
-    email: "",
+  const defaultValues = {
+    emailOrUsername: "",
     password: "",
   };
 
   const method = useForm({
     resolver: yupResolver(validation),
-    defaultvalues: defaultvalue,
+    defaultValues: defaultValues,
   });
 
   const handleLogin = () => {
@@ -40,9 +40,9 @@ const SignIn = () => {
       alert("User not found. Please sign up first.");
       return;
     }
-
+    const { emailOrUsername, password } = method.getValues(); // getting value from react hook form 
     if (
-      (storedUser.email === email || storedUser.username === username) &&
+      (storedUser.email === emailOrUsername || storedUser.username === emailOrUsername || storedUser.username === emailOrUsername) &&  
       storedUser.password === password
     ) {
       localStorage.setItem("isAuthenticated", "true");
@@ -68,29 +68,27 @@ const SignIn = () => {
         </Heading>
         <VStack spacing={4}>
           <Input
-            {...method.register("email")}
+            {...method.register("emailOrUsername")}
             type="text"
-            color={"black"}
             placeholder="Enter Username or Email"
-            mb={2}
-            value={email || username}
-            onChange={(e) =>
-              e.target.value.includes("@")
-                ? (setEmail(e.target.value), setUsername(""))
-                : (setUsername(e.target.value), setEmail(""))
-            }
+            color={"black"}
           />
-          {method.formstate.errors.email && (<p style={{color:"red"}}>{method.formstate.errors.email.message}</p>)}
+          {method.formState.errors.emailOrUsername && (
+            <p style={{ color: "red" }}>
+              {method.formState.errors.emailOrUsername.message}
+            </p>
+          )}
           <Input
-            type="password"
             {...method.register("password")}
+            type="password"
             placeholder="Enter Password"
-            value={password}
-            color="black"
-            onChange={(e) => setPassword(e.target.value)}
-            focusBorderColor="blue.500"
+            color={"black"}
           />
-          {method.formstate.errors.password && (<p style={{color:"red"}}>{method.formstate.errors.password.message}</p>)}
+          {method.formState.errors.password && (
+            <p style={{ color: "red" }}>
+              {method.formState.errors.password.message}
+            </p>
+          )}
           <Button type="submit" colorScheme="blue" width="full">
             Sign In
           </Button>
