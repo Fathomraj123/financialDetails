@@ -1,13 +1,9 @@
 import { Box, Text, Spinner} from "@chakra-ui/react";
-<<<<<<< HEAD
 import PersonCard from "@/components/card";
 import usePeopleData from "@/hooks/usePeopleData";
 import {Searching, Sorting} from "@/components/SearctAndSort";
-=======
-import PersonCard from "../components/Card";
-import usePeopleData from "../hooks/usePeopleData";
-import {Searching, Sorting} from "../components/SearctAndSort";
->>>>>>> 2262581d4e9d133c7fed6e1d109e5684874de17b
+
+
 import { useState } from "react";
 
 const PersonalCard = () => {
