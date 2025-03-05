@@ -1,7 +1,9 @@
 import { Box, Button, Input, Heading, Text, Link , VStack} from "@chakra-ui/react";
 import { useState,useEffect } from "react";
 import {useNavigate } from "react-router-dom";
-
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
 
 const SignIn = () =>{
@@ -22,7 +24,7 @@ const SignIn = () =>{
     
         if ((storedUser.email === email || storedUser.username === username) && storedUser.password === password) {
             localStorage.setItem("isAuthenticated", "true"); 
-            navigate("/");
+            navigate("/Home");
             window.location.reload();
         } else {
             alert("Invalid credentials");
