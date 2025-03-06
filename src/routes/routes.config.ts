@@ -5,15 +5,17 @@ import PersonalCard from "@/pages/personalCard";
 import FinancialInfo from "@/pages/financialInfo";
 import PageNotFound from "@/pages/PageNotFound";
 import { NAVIGATION_ROUTES} from "@/routes/routes.constant"
+import {FC} from 'react'
 
 interface RouteProps {
     path: string;
-    element: React.FC;
+    element: FC;
     private?: boolean;
   }
 
  const routes: RouteProps[] = [
-  {path: "/", element: SignIn },
+  { path: "/", 
+    element: SignIn },
 
   { path:NAVIGATION_ROUTES.HOME ,
     element: Home },

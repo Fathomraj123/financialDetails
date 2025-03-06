@@ -42,7 +42,7 @@ const Header = () => {
           <DrawerOverlay />
           <DrawerContent bg="grey.100">
             <DrawerHeader bgColor="purple.900">
-              <Link to="/">
+              <Link to="/Home">
                 {" "}
                 <Image
                   src="https://static.ambitionbox.com/alpha/company/photos/logos/qualtech-consultants-pvt.jpg"

@@ -32,7 +32,7 @@ export default function Home() {
         )}
       </Box>
       <Stack spacing={4} as={Container} maxW={"3xl"} textAlign={"center"}>
-        <Heading fontSize={"3xl"}>This is the headline</Heading>
+        <Heading color="black" fontSize={"3xl"}>This is the headline</Heading>
         <Text color={"gray.600"} fontSize={"xl"}>
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
           nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,

@@ -6,54 +6,80 @@ import {
   Text,
   Link,
   VStack,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
 } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
+const defaultValues = {
+  emailOrUsername: "",
+  password: "",
+};
+
+const validation = yup.object().shape({
+  emailOrUsername: yup.string().required("Email or Username is required"),
+  password: yup.string().required("Password is required"),
+});
+
 const SignIn = () => {
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-
-  const validation = yup.object().shape({
-    emailOrUsername: yup.string().required("Email or Username is required"),
-    password: yup.string().required("Password is mandatory"),
-  });
-  const defaultValues = {
-    emailOrUsername: "",
-    password: "",
-  };
-
   const method = useForm({
     resolver: yupResolver(validation),
     defaultValues: defaultValues,
   });
 
+  const navigate = useNavigate();
+  const {
+    getValues,
+    handleSubmit,
+    register,
+    setError,
+    clearErrors,
+    formState: { errors },
+  } = method;
+
   const handleLogin = () => {
     const storedUser = JSON.parse(localStorage.getItem("user") || "null");
 
     if (!storedUser) {
-      alert("User not found. Please sign up first.");
+      setError("emailOrUsername", {
+        type: "manual",
+        message: "User not found.Please sign up first.",
+      });
       return;
     }
-    const { emailOrUsername, password } = method.getValues(); // getting value from react hook form 
-    if (
-      (storedUser.email === emailOrUsername || storedUser.username === emailOrUsername || storedUser.username === emailOrUsername) &&  
-      storedUser.password === password
-    ) {
+
+    const { emailOrUsername, password } = getValues();
+    const isEmailOrUsernameValid =
+      storedUser.email === emailOrUsername ||
+      storedUser.username === emailOrUsername;
+
+    const isPasswordValid = storedUser.password === password;
+
+    if (isEmailOrUsernameValid && isPasswordValid) {
       localStorage.setItem("isAuthenticated", "true");
       navigate("/Home");
       window.location.reload();
-    } else {
-      alert("Invalid credentials");
+    } else if (!isEmailOrUsernameValid) {
+      setError("emailOrUsername", {
+        type: "manual",
+        message: "Invalid email or username",
+      });
+      clearErrors("password");
+    } else if (!isPasswordValid) {
+      setError("password", {
+        type: "manual",
+        message: "Invalid password",
+      });
+      clearErrors("emailOrUsername");
     }
   };
+
   return (
-    <form onSubmit={method.handleSubmit(handleLogin)}>
+    <form onSubmit={handleSubmit(handleLogin)}>
       <Box
         maxW="400px"
         mx="auto"
@@ -67,28 +93,32 @@ const SignIn = () => {
           Sign In
         </Heading>
         <VStack spacing={4}>
-          <Input
-            {...method.register("emailOrUsername")}
-            type="text"
-            placeholder="Enter Username or Email"
-            color={"black"}
-          />
-          {method.formState.errors.emailOrUsername && (
-            <p style={{ color: "red" }}>
-              {method.formState.errors.emailOrUsername.message}
-            </p>
-          )}
-          <Input
-            {...method.register("password")}
-            type="password"
-            placeholder="Enter Password"
-            color={"black"}
-          />
-          {method.formState.errors.password && (
-            <p style={{ color: "red" }}>
-              {method.formState.errors.password.message}
-            </p>
-          )}
+          <FormControl isInvalid={!!errors.emailOrUsername}>
+            <Input
+              {...register("emailOrUsername")}
+              type="text"
+              placeholder="Enter Username or Email"
+              color="black"
+              borderColor="gray.300"
+              _focus={{ borderColor: "blue.500" }}
+            />
+            <FormErrorMessage>
+              {errors.emailOrUsername?.message}
+            </FormErrorMessage>
+          </FormControl>
+
+          <FormControl isInvalid={!!errors.password}>
+            <Input
+              {...register("password")}
+              type="password"
+              placeholder="Enter Password"
+              color="black"
+              borderColor="gray.300"
+              _focus={{ borderColor: "blue.500" }}
+            />
+            <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
+          </FormControl>
+
           <Button type="submit" colorScheme="blue" width="full">
             Sign In
           </Button>
