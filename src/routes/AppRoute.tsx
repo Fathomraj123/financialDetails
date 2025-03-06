@@ -1,19 +1,29 @@
 import { Routes, Route } from "react-router-dom";
-import PersonalCard from "@/pages/personalCard";
 import Layout from "@/components/layout";
-import FinancialInfo from "@/pages/financialInfo";
-import SignIn from "@/pages/SignIn";
-import SignUp from "@/pages/SignUp";
-import PrivateRoute from "@/routes/PrivateRoute";
-import PageNotFound from "@/pages/PageNotFound";
-import Home from "@/pages/Home";
+import routes from "./routes.config";
+
+
 
 const AppRoute = () => {
   return (
     <div>
       <Layout>
         <Routes>
-          <Route path="/" element={<SignIn />} />
+          {routes.map((url) => {
+            {console.log(url.path, url)}
+            <Route key={url.path} path={url.path} element={<url.element />} />
+          })}
+        </Routes>
+      </Layout>
+    </div>
+  );
+};
+
+export default AppRoute;
+
+
+
+{/* <Route path="/" element={<SignIn />} />
           <Route path="/Home" element={<Home />} />
           <Route path="/SignIn" element={<SignIn />} />
           <Route path="/SignUp" element={<SignUp />} />
@@ -34,11 +44,4 @@ const AppRoute = () => {
                 <FinancialInfo />
               </PrivateRoute>
             }
-          />
-        </Routes>
-      </Layout>
-    </div>
-  );
-};
-
-export default AppRoute;
+          /> */}
