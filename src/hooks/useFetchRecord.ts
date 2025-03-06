@@ -16,26 +16,26 @@ const useFetchRecord = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    setLoading(true); 
+    setLoading(true);
 
     try {
       const response: FinanceData[] = Array.from({ length: 20 }, () => ({
         companyName: faker.company.name(),
         accountName: faker.finance.accountName(),
-        accountNumber: parseInt(faker.finance.accountNumber(), 10) || 0, 
-        amount: parseFloat(faker.finance.amount()), 
+        accountNumber: parseInt(faker.finance.accountNumber(), 10) || 0,
+        amount: parseFloat(faker.finance.amount()),
         transactionType: faker.finance.transactionType(),
-        balance: parseFloat(faker.finance.amount())
+        balance: parseFloat(faker.finance.amount()),
       }));
 
       setData(response);
-    //   console.log(response);
+      //   console.log(response);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unknown error occurred");
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
-  }, []); 
+  }, []);
 
   return { data, error, loading };
 };

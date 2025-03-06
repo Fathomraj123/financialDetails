@@ -6,36 +6,36 @@ import {
   Text,
   Link,
   VStack,
+  FormControl,
+  FormErrorMessage,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
+const validationSchema = yup.object().shape({
+  username: yup.string().required("Username is required"),
+  email: yup
+    .string()
+    .email("Invalid email")
+    .required("Email is required")
+    .test(
+      "is-valid-email",
+      "Invalid email format",
+      (value) =>
+        value?.includes(".") && (value.split(".").pop() || "").length > 1
+    ),
+  password: yup
+    .string()
+    .required("Password is required")
+    .min(8, "Password must be at least 8 characters")
+    .matches(/[A-Z]/, "Must include at least one uppercase letter")
+    .matches(/\d/, "Must include at least one number")
+    .matches(/[@$!%*?&]/, "Must include at least one special character"),
+});
+
 const SignUp = () => {
-  const navigate = useNavigate();
-
-  const validationSchema = yup.object().shape({
-    username: yup.string().required("Username is required"),
-    email: yup
-      .string()
-      .email("Invalid email")
-      .required("Email is required")
-      .test(
-        "is-valid-email",
-        "Invalid email format",
-        (value) =>
-          value?.includes(".") && (value.split(".").pop() || "").length > 1
-      ),
-    password: yup
-      .string()
-      .min(8, "Password must be at least 8 characters")
-      .matches(/[A-Z]/, "Must include at least one uppercase letter")
-      .matches(/\d/, "Must include at least one number")
-      .matches(/[@$!%*?&]/, "Must include at least one special character")
-      .required("Password is required"),
-  });
-
   const method = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
@@ -45,8 +45,16 @@ const SignUp = () => {
     },
   });
 
+  const navigate = useNavigate();
+  const {
+    getValues,
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = method;
+
   const handleSignUp = () => {
-    const { username, email, password } = method.getValues();
+    const { username, email, password } = getValues();
 
     localStorage.setItem("user", JSON.stringify({ username, email, password }));
     localStorage.setItem("isAuthenticated", "true");
@@ -54,8 +62,9 @@ const SignUp = () => {
     alert("Registration successful! Please log in to access your account.");
     navigate("/SignIn");
   };
+
   return (
-    <form onSubmit={method.handleSubmit(handleSignUp)}>
+    <form onSubmit={handleSubmit(handleSignUp)}>
       <Box
         maxW="400px"
         mx="auto"
@@ -66,44 +75,44 @@ const SignUp = () => {
         bg="gray.100"
       >
         <Heading as="h2" size="lg" mb="4" textAlign="center" color={"black"}>
-          Signup
+          Sign Up
         </Heading>
         <VStack spacing="4">
-          <Input
-            {...method.register("username")}
-            placeholder="Enter username"
-            color="black"
-            bg="white"
-          />
-          {method.formState.errors.username && (
-            <Text color="red.500" fontSize="sm">
-              {method.formState.errors.username.message}
-            </Text>
-          )}
-          <Input
-            {...method.register("email")}
-            type="email"
-            placeholder="Enter Email"
-            color="black"
-            bg="white"
-          />
-          {method.formState.errors.email && (
-            <Text color="red.500" fontSize="sm">
-              {method.formState.errors.email.message}
-            </Text>
-          )}
-          <Input
-            {...method.register("password")}
-            type="password"
-            placeholder="Enter Password"
-            color="black"
-            bg="white"
-          />
-          {method.formState.errors.password && (
-            <Text color="red.500" fontSize="sm">
-              {method.formState.errors.password.message}
-            </Text>
-          )}
+          <FormControl isInvalid={!!errors.username}>
+            <Input
+              {...register("username")}
+              placeholder="Enter Username"
+              bg="white"
+              color="black"
+            />
+            <FormErrorMessage color="red.500" fontSize="sm">
+              {errors.username?.message}
+            </FormErrorMessage>
+          </FormControl>
+          <FormControl isInvalid={!!errors.email}>
+            <Input
+              {...register("email")}
+              placeholder="Enter Email"
+              bg="white"
+              color="black"
+            />
+            <FormErrorMessage color="red.500" fontSize="sm">
+              {errors.email?.message}
+            </FormErrorMessage>
+          </FormControl>
+
+          <FormControl isInvalid={!!errors.password}>
+            <Input
+              type="password"
+              {...register("password")}
+              placeholder="Enter Password"
+              bg="white"
+              color="black"
+            />
+            <FormErrorMessage color="red.500" fontSize="sm">
+              {errors.password?.message}
+            </FormErrorMessage>
+          </FormControl>
 
           {/* Register Button  */}
           <Button type="submit" colorScheme="green" w="full">

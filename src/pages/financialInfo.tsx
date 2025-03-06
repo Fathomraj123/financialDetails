@@ -1,34 +1,38 @@
 import { useState } from "react";
 import usefetchRecord from "@/hooks/useFetchRecord";
-import { Box, Table, Thead, Tbody, Tr, Th, Td, Text, Spinner} from "@chakra-ui/react";
-import { Searching, Sorting } from "@/components/SearctAndSort"; 
-
+import {
+  Box,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Text,
+  Spinner,
+} from "@chakra-ui/react";
+import { Searching, Sorting } from "@/components/SearctAndSort";
 
 const FinancialInfo = () => {
-
   const { data, error, loading } = usefetchRecord();
   const [search, setSearch] = useState("");
 
-  const [submittedSearch, setSubmittedSearch] = useState(""); 
+  const [submittedSearch, setSubmittedSearch] = useState("");
   const [sort, setSort] = useState("");
 
   const handleSubmit = () => {
-    setSubmittedSearch(search.trim()); 
+    setSubmittedSearch(search.trim());
   };
 
   const filteredData = data.filter((item) => {
-
     return (
       item.accountName.toLowerCase().includes(submittedSearch.toLowerCase()) ||
       item.accountNumber.toString().includes(submittedSearch) ||
-      (item.companyName.toLowerCase().includes(submittedSearch.toLowerCase()))
+      item.companyName.toLowerCase().includes(submittedSearch.toLowerCase())
     );
   });
 
-
-
   const sortedData = filteredData.sort((a, b) => {
-
     if (sort === "A-Z ") {
       return a.companyName.localeCompare(b.companyName);
     } else if (sort === "Z-A") {
@@ -41,17 +45,39 @@ const FinancialInfo = () => {
     return 0;
   });
 
-
   return (
-    <Box display="flex" color = "black" flexDirection="column" alignItems="center" justifyContent="center" w="100%" p={4}>
+    <Box
+      display="flex"
+      color="black"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      w="100%"
+      p={4}
+    >
+      <Text fontSize="3xl" fontWeight="bold" mb={4}>
+        Finance Data
+      </Text>
 
-      <Text fontSize="3xl" fontWeight="bold" mb={4}>Finance Data</Text>
-
-      <Box display="flex" gap={4} justifyContent="space-between" mb={4} w="90%" maxW="1200px">
-        
-              <Sorting sort={sort} setSort={setSort} option= {["A-Z", "Z-A", "Low to High","High to Low"]} />
-               <Searching search = {search} setSearch = {setSearch} handleSubmit = {handleSubmit} placeholder={"Search by Comapany name, account number or acount name" } />
-        
+      <Box
+        display="flex"
+        gap={4}
+        justifyContent="space-between"
+        mb={4}
+        w="90%"
+        maxW="1200px"
+      >
+        <Sorting
+          sort={sort}
+          setSort={setSort}
+          option={["A-Z", "Z-A", "Low to High", "High to Low"]}
+        />
+        <Searching
+          search={search}
+          setSearch={setSearch}
+          handleSubmit={handleSubmit}
+          placeholder={"Search by Comapany name, account number or acount name"}
+        />
       </Box>
 
       {loading && <Spinner color="blue" />}

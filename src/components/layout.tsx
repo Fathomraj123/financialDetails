@@ -1,7 +1,5 @@
 import { Box } from "@chakra-ui/react";
-// import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-
 import Header from "@/Layout/Header";
 import Footer from "@/Layout/Footer";
 
