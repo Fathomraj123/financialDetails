@@ -4,15 +4,17 @@ import SignUp from "@/pages/SignUp";
 import PersonalCard from "@/pages/personalCard";
 import FinancialInfo from "@/pages/financialInfo";
 import PageNotFound from "@/pages/PageNotFound";
-import PrivateRoute from "@/routes/PrivateRoute";
 import { NAVIGATION_ROUTES} from "@/routes/routes.constant"
 
 interface RouteProps {
     path: string;
     element: React.FC;
+    private?: boolean;
   }
 
  const routes: RouteProps[] = [
+  {path: "/", element: SignIn },
+
   { path:NAVIGATION_ROUTES.HOME ,
     element: Home },
 
@@ -23,10 +25,12 @@ interface RouteProps {
     element: SignUp },
 
   { path:NAVIGATION_ROUTES.PERSONAL_CARD, 
-    element: PersonalCard},
+    element: PersonalCard,
+    private: true },
 
   { path: NAVIGATION_ROUTES.FINANCIAL_INFO, 
-    element: FinancialInfo },
+    element: FinancialInfo,
+    private: true  },
 
   { path: NAVIGATION_ROUTES.PAGE_NOT_FOUND, 
     element: PageNotFound },

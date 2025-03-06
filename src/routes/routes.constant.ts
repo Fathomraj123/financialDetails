@@ -1,5 +1,6 @@
 
 export const NAVIGATION_ROUTES = {
+    ROOT: "/",
     SIGNIN: "/SignIn",
     SIGNUP: "/SignUp",
     HOME: "/Home",
