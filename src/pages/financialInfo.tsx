@@ -1,22 +1,11 @@
 import { useState } from "react";
 import usefetchRecord from "@/hooks/useFetchRecord";
-import {
-  Box,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  Text,
-  Spinner,
-} from "@chakra-ui/react";
-import { Searching, Sorting } from "@/components/SearctAndSort";
+import { Box, Table, Thead, Tbody, Tr, Th, Td, Text, Spinner } from "@chakra-ui/react";
+import { Searching, Sorting } from "@/components/SearchAndSort";
 
 const FinancialInfo = () => {
   const { data, error, loading } = usefetchRecord();
   const [search, setSearch] = useState("");
-
   const [submittedSearch, setSubmittedSearch] = useState("");
   const [sort, setSort] = useState("");
 
@@ -33,13 +22,13 @@ const FinancialInfo = () => {
   });
 
   const sortedData = filteredData.sort((a, b) => {
-    if (sort === "A-Z ") {
+    if (sort === "A-Z (by Co. Name)") {
       return a.companyName.localeCompare(b.companyName);
-    } else if (sort === "Z-A") {
+    } else if (sort === "Z-A (by Co. Name)") {
       return b.companyName.localeCompare(a.companyName);
-    } else if (sort === "Low to High") {
+    } else if (sort === "Low to High (by Bal.)") {
       return a.balance - b.balance;
-    } else if (sort === "High to Low") {
+    } else if (sort === "High to Low (by Bal.)") {
       return b.balance - a.balance;
     }
     return 0;
@@ -70,7 +59,7 @@ const FinancialInfo = () => {
         <Sorting
           sort={sort}
           setSort={setSort}
-          option={["A-Z", "Z-A", "Low to High", "High to Low"]}
+          option={["A-Z (by Co. Name)", "Z-A (by Co. Name)", "Low to High (by Bal.) ", "High to Low (by Bal.)"]}
         />
         <Searching
           search={search}

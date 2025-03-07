@@ -7,7 +7,6 @@ import {
   Link,
   VStack,
   FormControl,
-  FormLabel,
   FormErrorMessage,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";

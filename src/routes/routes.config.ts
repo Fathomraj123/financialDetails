@@ -5,13 +5,7 @@ import PersonalCard from "@/pages/personalCard";
 import FinancialInfo from "@/pages/financialInfo";
 import PageNotFound from "@/pages/PageNotFound";
 import { NAVIGATION_ROUTES} from "@/routes/routes.constant"
-import {FC} from 'react'
 
-interface RouteProps {
-    path: string;
-    element: FC;
-    private?: boolean;
-  }
 
  const routes: RouteProps[] = [
   { path: "/", 

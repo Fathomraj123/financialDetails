@@ -1,12 +1,6 @@
 import { useState, useEffect } from "react";
 import { faker } from "@faker-js/faker";
 
-interface Person {
-  name: string;
-  email: string;
-  avatar: string;
-  city: string;
-}
 
 const usePeopleData = () => {
   const [people, setPeople] = useState<Person[]>([]);

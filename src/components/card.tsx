@@ -1,11 +1,5 @@
 import { Box, Image, Text } from "@chakra-ui/react";
 
-interface CardProps {
-  name: string;
-  email: string;
-  avatar: string;
-  city: string;
-}
 
 const Card = ({ name, email, avatar, city }: CardProps) => (
   <Box borderWidth="1px" borderRadius="lg" p={4} boxShadow="md">

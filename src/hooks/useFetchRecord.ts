@@ -1,14 +1,6 @@
 import { useState, useEffect } from "react";
 import { faker } from "@faker-js/faker";
 
-interface FinanceData {
-  companyName: string;
-  accountName: string;
-  accountNumber: number;
-  amount: number;
-  transactionType: string;
-  balance: number;
-}
 
 const useFetchRecord = () => {
   const [data, setData] = useState<FinanceData[]>([]);
