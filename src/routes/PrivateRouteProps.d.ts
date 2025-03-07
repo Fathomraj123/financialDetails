@@ -1,3 +1,0 @@
-interface PrivateRouteProps {
-    children: ReactNode;
-}
